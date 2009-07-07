@@ -44,3 +44,4 @@ production:
   database: peter_laboratory_production
   pool: 5
   username: peter
+  password: 123456
