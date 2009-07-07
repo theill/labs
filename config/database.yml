@@ -43,6 +43,4 @@ production:
   reconnect: false
   database: peter_laboratory_production
   pool: 5
-  username: root
-  password: 
-  socket: /tmp/mysql.sock
+  username: peter
