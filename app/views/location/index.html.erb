@@ -15,6 +15,9 @@
 				if (GBrowserIsCompatible() && (navigator.geolocation || (window.google && google.gears))) {
 					queryLocation();
 				}
+				else {
+					$("#map").html("<h1>Sorry</h1><p>Can't help you using this browser. You need Firefox 3.5+ or Google Gears.</p>");
+				}
 			});
 
 			function queryLocation() {
@@ -91,7 +94,7 @@
 		<div id="map">
 			<h1>Hold on!</h1>
 			<p>
-				I'm trying to figure ou where you are!
+				I'm trying to figure out where you are!
 			</p>
 		</div>
 	</body>
