@@ -17,7 +17,7 @@ class LiveTour
       result['updates'].each do |update|
         out += "<li><b>#{update['title']} (#{Time.parse(update['time']).strftime('%H:%M')})</b><br />\n#{update['text']}<br /><br />\n\n</li>"
       end
-      out += "</ul><script type=\"text/javascript\">var gaJsHost = ((\"https:\" == document.location.protocol) ? \"https://ssl.\" : \"http://www.\");document.write(unescape(\"%3Cscript src='\" + gaJsHost + \"google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E\"));</script><script type=\"text/javascript\">try {var pageTracker = _gat._getTracker(\"UA-617778-11\");pageTracker._trackPageview();} catch(err) {}</script>"
+      out += "</ul><script type=\"text/javascript\">var gaJsHost = ((\"https:\" == document.location.protocol) ? \"https://ssl.\" : \"http://www.\");document.write(unescape(\"%3Cscript src='\" + gaJsHost + \"google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E\"));</script><script type=\"text/javascript\">try {var pageTracker = _gat._getTracker(\"UA-617778-13\");pageTracker._trackPageview();} catch(err) {}</script>"
       out += '</body></html>'
 
       [200, {"Content-Type" => "text/html"}, [out]]
