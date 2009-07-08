@@ -10,7 +10,7 @@ $KCODE = 'u'
 class LiveTour
   def self.call(env)
     if env["PATH_INFO"] =~ /^\/livetour/
-      rsp = Net::HTTP.get_response(URI.parse('http://tour2009.tv2.dk/livedata.php/updates/id-12.ljson'))
+      rsp = Net::HTTP.get_response(URI.parse('http://tour2009.tv2.dk/livedata.php/updates/id-13.ljson'))
       data = rsp.body
       result = JSON.parse(data)
       out = "<html><head><meta http-equiv=\"Content-type\" content=\"text/html; charset=utf-8\" /><meta name=\"viewport\" content=\"width=320,initial-scale=1,user-scalable=no\" /><title>Tour de France live opdateringer til mobiltelefoner</title></head><body><ul>"
