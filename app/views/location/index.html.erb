@@ -23,7 +23,9 @@
 
 			function queryLocation() {
 				if (navigator.geolocation) {
-					navigator.geolocation.getCurrentPosition(positionFound, positionNotFound, {enableHighAccuracy: true});
+					// navigator.geolocation.getCurrentPosition(positionFound, positionNotFound, {enableHighAccuracy: true});
+					
+					var watchId = navigator.geolocation.watchPosition(positionFound, positionNotFound, {enableHighAccuracy: true});
 				}
 				else if (window.google && google.gears) {
 					var geo = google.gears.factory.create('beta.geolocation');
@@ -33,25 +35,27 @@
 	
 			function updateMap(latitude, longitude) {
 				var map = new GMap2(document.getElementById("map"));
+				map.enableContinuousZoom();
+				map.enableScrollWheelZoom();
 		
 				// center map
 				var point = new GLatLng(latitude, longitude);
-				map.setCenter(point, 14);
-				
+				map.setCenter(point, 16);
+
 				// mark found position
 		    var marker = new GMarker(point);
 		    map.addOverlay(marker);
 		
 				// resolve address
+				var foundAddress = "a destination in this world"
 				var geocoder = new GClientGeocoder();
 				geocoder.getLocations(point, function(response) { 
 					if (!response || response.Status.code != 200) {
-						alert('hmm');
 						return;
 					}
 					
-					// $("#user_geo_address").attr("value", response.Placemark[0].address);
-					// $("#geo_lat_lng").html("Lat: " + latitude + ", Lng: " + longitude);
+					foundAddress = response.Placemark[0].address;
+					marker.bindInfoWindowHtml('You are at ' + foundAddress);
 				});
 			}
 
