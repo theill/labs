@@ -11,9 +11,15 @@
 		<script src="/javascripts/gears_init.js"></script>
 		<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAABPHC2xpPDspLGjzJeCbOKxTa49wdPbz4vd337zQZaCvLVbL0IBTJB2PsOfNoQtd41zViFgWycG8XMw" type="text/javascript"></script>
 		<script type="text/javascript">
-		
+			
+			var map, marker;
+			
 			$(document).ready(function() {
 				if (GBrowserIsCompatible() && (navigator.geolocation || (window.google && google.gears))) {
+					map = new GMap2(document.getElementById("map"));
+					map.enableContinuousZoom();
+					map.enableScrollWheelZoom();
+										
 					queryLocation();
 				}
 				else {
@@ -29,22 +35,24 @@
 				}
 				else if (window.google && google.gears) {
 					var geo = google.gears.factory.create('beta.geolocation');
-					geo.getCurrentPosition(positionFound_gears, positionNotFound_gears);
+					// geo.getCurrentPosition(positionFound_gears, positionNotFound_gears);
+					var watchId = geo.watchPosition(positionFound_gears, positionNotFound_gears, {enableHighAccuracy: true});
 				}
 			}
 	
 			function updateMap(latitude, longitude) {
-				var map = new GMap2(document.getElementById("map"));
-				map.enableContinuousZoom();
-				map.enableScrollWheelZoom();
-		
 				// center map
 				var point = new GLatLng(latitude, longitude);
 				map.setCenter(point, 16);
 
 				// mark found position
-		    var marker = new GMarker(point);
-		    map.addOverlay(marker);
+				if (!marker) {
+			    marker = new GMarker(point);
+			    map.addOverlay(marker);
+				}
+				else {
+					marker.setLatLng(point);
+				}
 		
 				// resolve address
 				var foundAddress = "a destination in this world"
