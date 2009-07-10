@@ -34,6 +34,7 @@ ActionController::Routing::Routes.draw do |map|
   # map.root :controller => "welcome"
 
   # See how all your routes lay out with "rake routes"
+  map.livetour '/livetour.:format', :controller => 'tourdefrance'
   map.whereami '/whereami', :controller => 'location'
   
 
