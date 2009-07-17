@@ -26,7 +26,9 @@
 								li_id = item.time.replace(/ /g, '_').replace(/;/g, '_').replace(/:/g, '_').replace(/-/g, '_');
 								
 								if (!$("#" + li_id).exists()) {
-									new_li = $("<li />").attr('id', li_id).html("<div><b>" + item.title + "</b> <span>(" + item.time + ")</span></div>" + item.text);
+									var h = item.time.split(/(\d+)\:/)[1];
+									var m = item.time.split(/(\d+)\:/)[3];
+									new_li = $("<li />").attr('id', li_id).html("<div><b>" + item.title + "</b> <span>(" + h + ":" + m + ")</span></div>" + item.text);
 									new_li.css('display', 'none');
 									new_li.prependTo("#updates");
 									new_li.slideDown('slow');
