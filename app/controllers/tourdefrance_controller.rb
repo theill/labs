@@ -18,7 +18,14 @@ class TourdefranceController < ApplicationController
           end
         end
       end
-      format.json { render :json => data }
+      format.json do
+        result = JSON.parse(data) rescue ''
+        unless result.blank?
+          latest_few_minutes = -3.minutes.from_now
+          result['updates'] = result['updates'].delete_if { |a| a['time'].to_datetime < latest_few_minutes }
+        end
+        render :json => result.to_json
+      end
     end
   end
 end
