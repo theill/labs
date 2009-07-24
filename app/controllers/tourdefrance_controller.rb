@@ -3,7 +3,7 @@ require 'net/http'
 
 class TourdefranceController < ApplicationController
   def index
-    rsp = Net::HTTP.get_response(URI.parse('http://tour2009.tv2.dk/livedata.php/updates/id-' + (Date.today.day + 4).to_s + '.ljson'))
+    rsp = Net::HTTP.get_response(URI.parse('http://tour2009.tv2.dk/livedata.php/updates/id-' + (Date.today.day + 3).to_s + '.ljson'))
     data = rsp.body
     
     respond_to do |format|
